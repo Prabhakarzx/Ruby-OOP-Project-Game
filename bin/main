@@ -14,12 +14,12 @@ puts  "#{player1} type a symbol to play with (X, 0)"
  players[player1] = gets.chomp.downcase
 
 
-players[player1] == 'x' ? players[player2] = "0" : players[player2] = 'x'
+players[player1] == 'x' ? players[player2] = '0' : players[player2] = 'x'
     
 puts "#{player2} You have been assigned with O symbol"
 p "Your wepon #{players}"
 
-puts "Here is the play board /n Rows are 1, 2 , 3 And Colums are a, b, c"
+puts "Here is the play board \n Rows are 1, 2 , 3 And Colums are a, b, c"
 puts "  _a___b__c_"
 puts "1 |  |  |  |"
 puts "  |__|__|__|"
@@ -30,10 +30,32 @@ puts "  |__|__|__|"
 
 
 puts "Its #{player1} turn now!\n#{player1}, You've to put #{players[player1]} at the box address!"
-turn1 = get.chom.to_i 
+ turn1 = gets.chomp.to_i 
 
-puts "Its #{player2} turn now!\n#{player2}, You've to put #{players[player2]} at the box address!"
-turn2 = get.chom.to_i 
+#Display the available space and let the player1 put x or 0
+
+#Now allow player2 to ender the x or 0 in the available space
+
+ puts "\n Its #{player2} turn now!\n#{player2}, You've to put #{players[player2]} at the box address!"
+# turn2 = gets.chomp.to_i 
+
+# Now find out the available space and prompt player1 to put his symbol
+
+puts "\n Its #{player1} turn now!"
+puts "#{player1}, You can put #{players[player1]} in these available space."
+
+# Prompt player2 with available space to put his symbol
+
+puts "\n Its #{player2} turn now!"
+puts "#{player2}, You can put #{players[player2]} in these available space."
+
+# After player1 player for three times run the game logic to check if he wins
+
+#If player1 is not winning move to player2 and show the available splace
+
+#Check if player2 is winning, if not move to player1 and let him enter the value in available blocks
+
+#after player1 has played 5 times and neither player is winning declare a Draw
 
 
 
