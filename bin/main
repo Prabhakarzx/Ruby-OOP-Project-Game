@@ -12,20 +12,25 @@ puts  "#{player1} type a symbol to play with (X, O)"
  
 players[player1] = gets.chomp
 
-puts  "#{player2} type a symbol to play with (X, O)"
-
-players[player2] = gets.chomp
+if players[player1] == 'x'
+    players[player2] = 0
+else
+    players[player2] = 'x'
+end
 
 p "Your wepon #{players}"
 
 puts "Here is the play board /n Rows are 1, 2 , 3 And Colums are a, b, c"
-puts "_a___b__c_"
-puts "|  |  |  |"
-puts
+puts "  _a___b__c_"
+puts "1 |  |  |  |"
+puts "  |__|__|__|"
+puts "2 |  |  |  |"
+puts "  |__|__|__|"
+puts "3 |  |  |  |"
+puts "  |__|__|__|"
 
 
-
-puts "Its #{player1} turn now!\n#{player1}, You've to put #{Player[player1]} at the box address!
+puts "Its #{player1} turn now!\n#{player1}, You've to put #{player[player1]} at the box address!"
 
 
 
