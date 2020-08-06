@@ -2,40 +2,36 @@
 puts 'Hello World!'
 players = {}
 
-
-puts "Player 1 please let me know your name"
+puts 'Player 1 please let me know your name'
 player1 = gets.chomp
 
-puts "Player 2 please let me know your name"
+puts 'Player 2 please let me know your name'
 player2 = gets.chomp
 
+puts "#{player1} type a symbol to play with (X, 0)"
+players[player1] = gets.chomp.downcase
 
-puts  "#{player1} type a symbol to play with (X, 0)"
- players[player1] = gets.chomp.downcase
+players[player2] = players[player1] == 'x' ? '0' : 'x'
 
-
-players[player1] == 'x' ? players[player2] = '0' : players[player2] = 'x'
-    
 puts "#{player2} You have been assigned with #{players[player2]} symbol"
 p "Your wepon #{players}"
 
 puts "Here is the play board \n Rows are 1, 2 , 3 And Colums are a, b, c"
-puts "  _a___b__c_"
-puts "1 |  |  |  |"
-puts "  |__|__|__|"
-puts "2 |  |  |  |"
-puts "  |__|__|__|"
-puts "3 |  |  |  |"
-puts "  |__|__|__|"
-
+puts '  _a___b__c_'
+puts '1 |  |  |  |'
+puts '  |__|__|__|'
+puts '2 |  |  |  |'
+puts '  |__|__|__|'
+puts '3 |  |  |  |'
+puts '  |__|__|__|'
 
 puts "Its #{player1} turn now!\n#{player1}, You've to put #{players[player1]} at the box address!"
 
-#Display the available space and let the player1 put x or 0
+# Display the available space and let the player1 put x or 0
 
-#Now allow player2 to ender the x or 0 in the available space
+# Now allow player2 to ender the x or 0 in the available space
 
- puts "\n Its #{player2} turn now!\n#{player2}, You've to put #{players[player2]} at the box address!"
+puts "\n Its #{player2} turn now!\n#{player2}, You've to put #{players[player2]} at the box address!"
 
 # Now find out the available space and prompt player1 to put his symbol
 
@@ -51,16 +47,12 @@ puts "#{player2}, You can put #{players[player2]} in these available space."
 
 puts "\nCongratulations #{player1}, You won!"
 
-#If player1 is not winning move to player2 and show the available splace
+# If player1 is not winning move to player2 and show the available splace
 
-#Check if player2 is winning, if not move to player1 and let him enter the value in available blocks
+# Check if player2 is winning, if not move to player1 and let him enter the value in available blocks
 
 puts "\nCongratulations #{player2}, You won!"
 
-#after player1 has played 5 times and neither player is winning declare a Draw
+# after player1 has played 5 times and neither player is winning declare a Draw
 
-puts "Its a Draw!"
-
-
-
-
+puts 'Its a Draw!'
