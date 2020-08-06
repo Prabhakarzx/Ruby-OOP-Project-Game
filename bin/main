@@ -1,2 +1,15 @@
 #!/usr/bin/env ruby
 puts 'Hello World!'
+players = {}
+
+puts "Player 1 please let me know your name"
+player1 = gets.chomp
+
+puts "Player 2 please let me know your name"
+player2 = gets.chomp
+
+puts  "#{player}type a symbol to play with (X, O)"
+symbol = gets.chomp
+
+
+
