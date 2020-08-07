@@ -1,2 +1,98 @@
 #!/usr/bin/env ruby
 puts 'Hello World!'
+players = {}
+a = %w[1 2 3]
+b = %w[4 5 6]
+c = %w[7 8 9]
+@board = [a, b, c]
+
+# Here we Get player 1 name
+puts 'Player 1 please let me know your name'
+player1 = gets.chomp
+# Here we get player 2 name
+puts 'Player 2 please let me know your name'
+player2 = gets.chomp
+# Ask user 1 for prefered symbol
+puts "#{player1} type a symbol to play with (X, 0)"
+players[player1] = gets.chomp.downcase
+
+players[player2] = players[player1] == 'x' ? '0' : 'x'
+
+puts "#{player2} You have been assigned with #{players[player2]} symbol"
+p "Your wepon #{players}"
+
+puts "Here is the play board \n Rows are 1, 2 , 3 And Colums are a, b, c (mock)"
+puts '  _a___b__c_'
+puts '1 |  |  |  |'
+puts '  |__|__|__|'
+puts '2 |  |  |  |'
+puts '  |__|__|__|'
+puts '3 |  |  |  |'
+puts '  |__|__|__|'
+
+# Display the available space and let the player1 put x or 0
+
+def display__board
+  p @board[0]
+  p @board[1]
+  p @board[2]
+end
+
+# This method search for position in board and change it for player symbol (TSE requirement)
+def position(number, symbol)
+  if number < 4
+    line = @board[0]
+  elsif number > 3 && number < 7
+    line = @board[1]
+  elsif number > 6
+    line = @board[2]
+  else
+    puts 'does not exist you lost your turn'
+
+  end
+  number = number.to_s
+  line&.each_with_index do |element, index|
+    line[index] = symbol if element == number
+  end
+end
+
+turns = 0
+while turns < 9
+  # Now find out the available space and prompt player1 to put his symbol
+  puts "\n Its #{player1} turn now!"
+  puts "#{player1}, You can put #{players[player1]} in available spaces."
+
+  display__board
+
+  turn1 = gets.chomp.to_i
+  position(turn1, players[player1])
+
+  display__board
+  # Prompt player2 with available space to put his symbol
+  turns += 1
+
+  unless turns == 9
+    puts "\n Its #{player2} turn now!"
+    puts "#{player2}, You can put #{players[player2]} in available spaces."
+
+    turn2 = gets.chomp.to_i
+    position(turn2, players[player2])
+
+    display__board
+  end
+  turns += 1
+
+end
+# After player1 player for three times run the game logic to check if he wins
+
+puts "\nCongratulations #{player1}, You won!"
+
+# If player1 is not winning move to player2 and show the available splace
+
+# Check if player2 is winning, if not move to player1 and let him enter the value in available blocks
+
+puts "\nCongratulations #{player2}, You won!"
+
+# after player1 has played 5 times and neither player is winning declare a Draw
+
+puts 'Its a Draw!'
