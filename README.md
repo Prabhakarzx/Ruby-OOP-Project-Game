@@ -5,7 +5,7 @@ Milestone 1: Project Setup  (Completed)
 
 - lib and bin  directory created    
 - main script executable    
-- "Hello world printed"
+- "Hello world" printed
 
 Milestone 2: User interface (In progreess)
 
