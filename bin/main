@@ -1,9 +1,11 @@
 #!/usr/bin/env ruby
 puts 'Hello World!'
 players = {}
-a = ["1", "2", "3"]
-b = ["4", "5", "6"]
-c = ["7", "8", "9"]
+a = %w[1 2 3]
+b = %w[4 5 6]
+c = %w[7 8 9]
+@board = [a, b, c]
+
 # Here we Get player 1 name
 puts 'Player 1 please let me know your name'
 player1 = gets.chomp
@@ -29,59 +31,56 @@ puts '3 |  |  |  |'
 puts '  |__|__|__|'
 
 # Display the available space and let the player1 put x or 0
-$board = [a, b, c]
-def display__board 
-  p $board[0]
-  p $board[1]
-  p $board[2]
+
+def display__board
+  p @board[0]
+  p @board[1]
+  p @board[2]
 end
+
 # This method search for position in board and change it for player symbol (TSE requirement)
-def position (number, symbol)
-  if number > 0 && number < 4
-    line = $board[0]
+def position(number, symbol)
+  if number < 4
+    line = @board[0]
   elsif number > 3 && number < 7
-    line = $board[1]
-  elsif number > 6 && number < 10
-    line = $board[2]
-  else 
-    puts "does not exist you lost your turn"
-  
+    line = @board[1]
+  elsif number > 6
+    line = @board[2]
+  else
+    puts 'does not exist you lost your turn'
+
   end
   number = number.to_s
-  unless line.nil?
-  line.each_with_index do |element, index| 
-    if element == number
-        line[index] = symbol
-    end
+  line&.each_with_index do |element, index|
+    line[index] = symbol if element == number
   end
-  end
-
 end
 
 turns = 0
 while turns < 9
-# Now find out the available space and prompt player1 to put his symbol
-puts "\n Its #{player1} turn now!"
-puts "#{player1}, You can put #{players[player1]} in available spaces."
+  # Now find out the available space and prompt player1 to put his symbol
+  puts "\n Its #{player1} turn now!"
+  puts "#{player1}, You can put #{players[player1]} in available spaces."
 
-display__board
+  display__board
 
-turn1 = gets.chomp.to_i
-position(turn1, players[player1])
+  turn1 = gets.chomp.to_i
+  position(turn1, players[player1])
 
-display__board
-# Prompt player2 with available space to put his symbol
-turns += 1
+  display__board
+  # Prompt player2 with available space to put his symbol
+  turns += 1
 
-puts "\n Its #{player2} turn now!"
-puts "#{player2}, You can put #{players[player2]} in available spaces."
+  unless turns == 9
+    puts "\n Its #{player2} turn now!"
+    puts "#{player2}, You can put #{players[player2]} in available spaces."
 
-turn2 = gets.chomp.to_i
-position(turn2, players[player2])
+    turn2 = gets.chomp.to_i
+    position(turn2, players[player2])
 
-display__board
-
-turns += 1
+    display__board
+  end
+  turns += 1
 
 end
 # After player1 player for three times run the game logic to check if he wins
