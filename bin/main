@@ -33,7 +33,7 @@ while turns < 9
   # Now find out the available space and prompt player1 to put his symbol
   puts "\n Its #{player1.name} turn now!"
   puts "#{player1.name}, You can put #{player1.symbol} in available spaces."
-  
+
   board.display_board
 
   turn = gets.chomp.to_i
