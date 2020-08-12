@@ -17,7 +17,7 @@ class Board
     @symbol = symbol
     if @position < 4
       replace(0)
-    elsif @position > 3 && number < 7
+    elsif @position > 3 && @position < 7
       replace(1)
     elsif @position > 6
       replace(2)

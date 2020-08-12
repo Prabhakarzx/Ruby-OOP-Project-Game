@@ -2,18 +2,17 @@
 require_relative '../lib/board.rb'
 require_relative '../lib/player.rb'
 puts 'What is you name Player 1?'
-name1 = gets.chomp
+name = gets.chomp
+
+puts "#{name} type a symbol to play with (X, 0)"
+symbol = gets.chomp.downcase
+player1 = Player.new(name, symbol)
 
 puts 'What is your name Player 2?'
-name2 = gets.chomp
+name = gets.chomp
+symbol = symbol == 'x' ? '0' : 'x'
 
-puts "#{name1} type a symbol to play with (X, 0)"
-symbol1 = gets.chomp.downcase
-
-symbol2 = symbol1 == 'x' ? '0' : 'x'
-
-player1 = Player.new(name1, symbol1)
-player2 = Player.new(name2, symbol2)
+player2 = Player.new(name, symbol)
 
 puts "#{player2.name} You have been assigned with #{player2.symbol} symbol"
 
@@ -37,6 +36,7 @@ while turns < 9
   board.display_board
 
   turn = gets.chomp.to_i
+
   board.place_symbol(turn, player1.symbol)
 
   board.display_board
