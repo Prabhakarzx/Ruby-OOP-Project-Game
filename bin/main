@@ -57,13 +57,13 @@ while turns < 9
 end
 # After player1 player for three times run the game logic to check if he wins
 
-puts "\nCongratulations #{player1}, You won!"
+puts "\nCongratulations #{player1.name}, You won!"
 
 # If player1 is not winning move to player2 and show the available splace
 
 # Check if player2 is winning, if not move to player1 and let him enter the value in available blocks
 
-puts "\nCongratulations #{player2}, You won!"
+puts "\nCongratulations #{player2.name}, You won!"
 
 # after player1 has played 5 times and neither player is winning declare a Draw
 
