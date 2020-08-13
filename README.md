@@ -1,4 +1,4 @@
-# Ruby-OOP-Project-Game Project
+# Ruby-OOP-Project-Game
 In this project we're required to create a Tic Tac Toe Game using Ruby with OOP concepts.
 
 Milestone 1: Project Setup  (Completed)
