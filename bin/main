@@ -35,9 +35,6 @@ player2 = Player.new(name, symbol)
 
 puts "#{player2.name} You have been assigned with #{player2.symbol} symbol"
 
-p1score = 0
-p2score = 0
-
 def input(board)
   validate = false
 
@@ -48,6 +45,8 @@ def input(board)
   end
   turn
 end
+
+# rubocop:disable Metrics/MethodLength
 
 def game(player1, player2, board)
   turns = 0
@@ -93,6 +92,8 @@ def game(player1, player2, board)
 
   play_again(player1, player2, board)
 end
+
+# rubocop:enable Metrics/MethodLength
 
 def play_again(player1, player2, board)
   puts "Game States : #{player1.name} : #{player1.score} and #{player2.name} : #{player2.score}"
