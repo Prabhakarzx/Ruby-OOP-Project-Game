@@ -35,8 +35,6 @@ class Board
 end
 
 
-
-
 class Logic
   attr_reader :board
   WINNING_MOVES = [[1, 2, 3], [4, 5, 6], [7, 8, 9], [1, 4, 7], [2, 5, 8], [3, 6, 9], [1, 5, 9], [3, 5, 7]].freeze
@@ -44,11 +42,6 @@ class Logic
     @player1_array = Player.player1_array
     @player2_array = Player.player2_array
   end
-
-  
-
-
-
 
   def update(move, current_player)
     return false if @board[move - 1] == 'X' || @board[move - 1] == 'O'
@@ -63,10 +56,6 @@ class Logic
     end
   end
 
-
-
-
-
   def check_move(array)
     if winning_move?(array)
       reinstate_logic
@@ -77,10 +66,6 @@ class Logic
     end
   end
 
-
-
-
-
   def winning_move?(array)
     WINNING_MOVES.length.times do |i|
       return true if WINNING_MOVES[i].all? { |j| array.include?(j) }
@@ -88,23 +73,14 @@ class Logic
     false
   end
 
-
   def draw?(_array)
     @board.none?(Integer)
   end
-
 
   def reinstate_logic
     @board = [1, 2, 3, 4, 5, 6, 7, 8, 9]
     @player1_array = []
     @player2_array = []
   end
-
-  
-
-
-
-  
- 
   
 end
