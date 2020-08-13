@@ -94,6 +94,13 @@ class Logic
   end
 
 
+  def reinstate_logic
+    @board = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    @player1_array = []
+    @player2_array = []
+  end
+
+  
 
 
 
