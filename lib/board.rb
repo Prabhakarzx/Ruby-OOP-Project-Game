@@ -12,22 +12,28 @@ class Board
   def place_symbol(position, symbol)
     @position = position
     @symbol = symbol
-      @board.each_with_index do |element, index|
-        if element == @position 
-          @board[index] = @symbol
-        end
-      end
+    @board.each_with_index do |element, index|
+      @board[index] = @symbol if element == @position
+    end
   end
 
-  def validate (turn)
+  def validate_turn(turn)
     validate = false
-    
-    @board.each_with_index do |element|
-      if element == turn 
+
+    @board.each do |element|
+      if element == turn
         validate = true
         break
       end
     end
-    
-  end 
+
+    validate != false
+  end
+  def validate_symbol (symbol)
+    if symbol == "X" || symbol == "O"
+      true
+    else 
+      false
+    end
+  end
 end
