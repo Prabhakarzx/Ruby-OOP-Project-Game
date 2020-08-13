@@ -4,11 +4,11 @@ require_relative '../lib/player.rb'
 board = Board.new
 board.create_board
 puts "Welcome to tic tac toe
-1.play 
+1.play
 2.exit"
 choice = gets.chomp.to_i
 if choice == 2
-  at_exit {puts "Goodbye, thanks for playing"}
+  at_exit { puts 'Goodbye, thanks for playing' }
   exit
 end
 validate = false
@@ -35,6 +35,9 @@ player2 = Player.new(name, symbol)
 
 puts "#{player2.name} You have been assigned with #{player2.symbol} symbol"
 
+p1score = 0
+p2score = 0
+
 def input(board)
   validate = false
 
@@ -46,73 +49,69 @@ def input(board)
   turn
 end
 
+def game(player1, player2, board)
+  turns = 0
+  while turns < 9
+    puts "\n Its #{player1.name} turn now!"
+    puts "#{player1.name}, You can put #{player1.symbol} in available spaces."
 
-def game (player1, player2, board)
-turns = 0
-while turns < 9
-  puts "\n Its #{player1.name} turn now!"
-  puts "#{player1.name}, You can put #{player1.symbol} in available spaces."
-
-  board.display_board
-
-  turn = input(board)
-
-  board.place_symbol(turn, player1)
-
-  if board.check_win(player1.array)
-    puts "#{player1.name} won!"
     board.display_board
-    break
-  end
-  board.display_board
-  turns += 1
-
-  unless turns == 9
-    puts "\n Its #{player2.name} turn now!"
-    puts "#{player2.name}, You can put #{player2.symbol} in available spaces."
 
     turn = input(board)
 
-    board.place_symbol(turn, player2)
-    if board.check_win(player2.array)
-      puts "#{player2.name} won!"
+    board.place_symbol(turn, player1)
+
+    if board.check_win(player1.array)
+      puts "#{player1.name} won!"
+      player1.score += 1
+
       board.display_board
       break
     end
     board.display_board
+    turns += 1
+
+    unless turns == 9
+      puts "\n Its #{player2.name} turn now!"
+      puts "#{player2.name}, You can put #{player2.symbol} in available spaces."
+
+      turn = input(board)
+
+      board.place_symbol(turn, player2)
+      if board.check_win(player2.array)
+        puts "#{player2.name} won!"
+        player2.score += 1
+        board.display_board
+        break
+      end
+      board.display_board
+    end
+    turns += 1
+
   end
-  turns += 1
+  puts 'Its a Draw!' if turns == 10
 
-end
-puts 'Its a Draw!' if turns == 10
-
-play_again(player1, player2, board)
-
+  play_again(player1, player2, board)
 end
 
-def play_again (player1, player2, board)
+def play_again(player1, player2, board)
+  puts "Game States : #{player1.name} : #{player1.score} and #{player2.name} : #{player2.score}"
   puts 'whould you like to play again?
 1. Yes
 2. No'
-choice = gets.chomp.to_i
+  choice = gets.chomp.to_i
 
-if choice == 1
-  board.create_board
-  player1.clear_array
-  player2.clear_array
-  game(player1, player2, board)
-elsif choice == 2
-   puts "Goodbye, thanks for playing"
-else 
-  puts "Please enter a valid option"
-  play_again(player1, player2, board)
-end
+  if choice == 1
+    board.create_board
+    player1.clear_array
+    player2.clear_array
+    game(player1, player2, board)
+  elsif choice == 2
+    puts 'Goodbye, thanks for playing'
+  else
+    puts 'Please enter a valid option'
+    play_again(player1, player2, board)
+  end
 end
 
 game(player1, player2, board)
-
-
-
-
-
-
