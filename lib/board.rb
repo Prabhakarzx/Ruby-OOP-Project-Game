@@ -63,6 +63,21 @@ class Logic
     end
   end
 
+
+
+
+
+  def check_move(array)
+    if winning_move?(array)
+      reinstate_logic
+      'WIN'
+    elsif draw?(array)
+      reinstate_logic
+      'DRAW'
+    end
+  end
+
+  
  
   
 end
