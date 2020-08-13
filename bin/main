@@ -16,31 +16,33 @@ player2 = Player.new(name, symbol)
 
 puts "#{player2.name} You have been assigned with #{player2.symbol} symbol"
 
-puts "Here is the play board \n Rows are 1, 2 , 3 And Colums are a, b, c (mock)"
-puts '  _a___b__c_'
-puts '1 |  |  |  |'
-puts '  |__|__|__|'
-puts '2 |  |  |  |'
-puts '  |__|__|__|'
-puts '3 |  |  |  |'
-puts '  |__|__|__|'
 board = Board.new
 board.create_board
 
 turns = 0
 while turns < 9
-  # Now find out the available space and prompt player1 to put his symbol
+  
   puts "\n Its #{player1.name} turn now!"
   puts "#{player1.name}, You can put #{player1.symbol} in available spaces."
 
   board.display_board
 
   turn = gets.chomp.to_i
+  validate = false
+  while validate = false 
+
+  if board.validate(turn)
+    validate = true
+  else 
+    puts"please insert a valid position"
+  end
+
+  end
 
   board.place_symbol(turn, player1.symbol)
 
   board.display_board
-  # Prompt player2 with available space to put his symbol
+  
   turns += 1
 
   unless turns == 9
@@ -48,8 +50,9 @@ while turns < 9
     puts "#{player2.name}, You can put #{player2.symbol} in available spaces."
 
     turn = gets.chomp.to_i
+    board.validate(turn)
     board.place_symbol(turn, player2.symbol)
-
+   
     board.display_board
   end
   turns += 1
@@ -57,13 +60,13 @@ while turns < 9
 end
 # After player1 player for three times run the game logic to check if he wins
 
-puts "\nCongratulations #{player1}, You won!"
+puts "\nCongratulations #{player1.name}, You won!"
 
 # If player1 is not winning move to player2 and show the available splace
 
 # Check if player2 is winning, if not move to player1 and let him enter the value in available blocks
 
-puts "\nCongratulations #{player2}, You won!"
+puts "\nCongratulations #{player2.name}, You won!"
 
 # after player1 has played 5 times and neither player is winning declare a Draw
 
