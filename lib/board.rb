@@ -77,6 +77,19 @@ class Logic
     end
   end
 
+
+
+
+
+  def winning_move?(array)
+    WINNING_MOVES.length.times do |i|
+      return true if WINNING_MOVES[i].all? { |j| array.include?(j) }
+    end
+    false
+  end
+
+
+
   
  
   
