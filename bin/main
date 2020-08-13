@@ -1,58 +1,69 @@
 #!/usr/bin/env ruby
 require_relative '../lib/board.rb'
 require_relative '../lib/player.rb'
+board = Board.new
+board.create_board
+
+validate = false
 puts 'What is you name Player 1?'
 name = gets.chomp
 
-puts "#{name} type a symbol to play with (X, 0)"
-symbol = gets.chomp.downcase
+puts "#{name} type a symbol to play with (X, O)"
+while validate == false
+symbol = gets.chomp.upcase
+unless board.validate_symbol(symbol) 
+  puts "please enter a valid symbol"
+else 
+  validate = true
+end
+end
+
 player1 = Player.new(name, symbol)
 
 puts 'What is your name Player 2?'
 name = gets.chomp
-symbol = symbol == 'x' ? '0' : 'x'
+symbol = symbol == 'X' ? 'O' : 'X'
 
 player2 = Player.new(name, symbol)
 
 puts "#{player2.name} You have been assigned with #{player2.symbol} symbol"
 
-board = Board.new
-board.create_board
+
+def input(board)
+  validate = false
+
+  while validate == false
+    turn = gets.chomp.to_i
+    validate = board.validate_turn(turn)
+    puts 'please enter a valid position' if validate == false
+  end
+  turn
+end
 
 turns = 0
 while turns < 9
-  
+
   puts "\n Its #{player1.name} turn now!"
   puts "#{player1.name}, You can put #{player1.symbol} in available spaces."
 
   board.display_board
 
-  turn = gets.chomp.to_i
-  validate = false
-  while validate = false 
-
-  if board.validate(turn)
-    validate = true
-  else 
-    puts"please insert a valid position"
-  end
-
-  end
+  turn = input(board)
 
   board.place_symbol(turn, player1.symbol)
 
   board.display_board
-  
+
   turns += 1
 
   unless turns == 9
     puts "\n Its #{player2.name} turn now!"
     puts "#{player2.name}, You can put #{player2.symbol} in available spaces."
 
-    turn = gets.chomp.to_i
-    board.validate(turn)
+    turn = input(board)
+
     board.place_symbol(turn, player2.symbol)
-   
+
     board.display_board
   end
   turns += 1
