@@ -76,4 +76,4 @@ while turns < 9
 
 end
 
-puts 'Its a Draw!' if turns == 9
+puts 'Its a Draw!' if turns == 10
