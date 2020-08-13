@@ -1,9 +1,15 @@
 class Player
-  attr_reader :name, :symbol
+  attr_reader :name, :symbol, :array
+
   def initialize(name, symbol)
-    @players = {}
+    @array = []
     @name = name
     @symbol = symbol
-    @players[@name] = @symbol
   end
+
+  def array=(number)
+    self.array.push(number)
+  end
+
 end
+

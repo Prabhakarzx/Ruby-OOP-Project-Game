@@ -42,7 +42,6 @@ end
 
 turns = 0
 while turns < 9
-
   puts "\n Its #{player1.name} turn now!"
   puts "#{player1.name}, You can put #{player1.symbol} in available spaces."
 
@@ -50,10 +49,9 @@ while turns < 9
 
   turn = input(board)
 
-  board.place_symbol(turn, player1.symbol)
+  board.place_symbol(turn, player1)
 
   board.display_board
-
   turns += 1
 
   unless turns == 9
@@ -62,7 +60,7 @@ while turns < 9
 
     turn = input(board)
 
-    board.place_symbol(turn, player2.symbol)
+    board.place_symbol(turn, player2)
 
     board.display_board
   end
@@ -72,7 +70,8 @@ end
 # After player1 player for three times run the game logic to check if he wins
 
 puts "\nCongratulations #{player1.name}, You won!"
-
+p player1.array
+p player2.array
 # If player1 is not winning move to player2 and show the available splace
 
 # Check if player2 is winning, if not move to player1 and let him enter the value in available blocks
