@@ -3,7 +3,14 @@ require_relative '../lib/board.rb'
 require_relative '../lib/player.rb'
 board = Board.new
 board.create_board
-
+puts "Welcome to tic tac toe
+1.play 
+2.exit"
+choice = gets.chomp.to_i
+if choice == 2
+  at_exit {puts "Goodbye, thanks for playing"}
+  exit
+end
 validate = false
 puts 'What is you name Player 1?'
 name = gets.chomp
@@ -39,6 +46,8 @@ def input(board)
   turn
 end
 
+
+def game (player1, player2, board)
 turns = 0
 while turns < 9
   puts "\n Its #{player1.name} turn now!"
@@ -75,5 +84,35 @@ while turns < 9
   turns += 1
 
 end
-
 puts 'Its a Draw!' if turns == 10
+
+play_again(player1, player2, board)
+
+end
+
+def play_again (player1, player2, board)
+  puts 'whould you like to play again?
+1. Yes
+2. No'
+choice = gets.chomp.to_i
+
+if choice == 1
+  board.create_board
+  player1.clear_array
+  player2.clear_array
+  game(player1, player2, board)
+elsif choice == 2
+   puts "Goodbye, thanks for playing"
+else 
+  puts "Please enter a valid option"
+  play_again(player1, player2, board)
+end
+end
+
+game(player1, player2, board)
+
+
+
+
+
+

@@ -10,4 +10,8 @@ class Player
   def array=(number)
     array.push(number)
   end
+  
+  def clear_array 
+    self.array.clear
+  end
 end
