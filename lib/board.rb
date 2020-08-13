@@ -89,6 +89,13 @@ class Logic
   end
 
 
+  def draw?(_array)
+    @board.none?(Integer)
+  end
+
+
+
+
 
   
  
