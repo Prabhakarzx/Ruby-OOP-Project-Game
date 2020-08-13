@@ -8,8 +8,6 @@ class Player
   end
 
   def array=(number)
-    self.array.push(number)
+    array.push(number)
   end
-
 end
-

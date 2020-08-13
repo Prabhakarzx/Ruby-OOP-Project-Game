@@ -10,12 +10,12 @@ name = gets.chomp
 
 puts "#{name} type a symbol to play with (X, O)"
 while validate == false
-symbol = gets.chomp.upcase
-unless board.validate_symbol(symbol) 
-  puts "please enter a valid symbol"
-else 
-  validate = true
-end
+  symbol = gets.chomp.upcase
+  if board.validate_symbol(symbol)
+    validate = true
+  else
+    puts 'please enter a valid symbol'
+  end
 end
 
 player1 = Player.new(name, symbol)
@@ -27,7 +27,6 @@ symbol = symbol == 'X' ? 'O' : 'X'
 player2 = Player.new(name, symbol)
 
 puts "#{player2.name} You have been assigned with #{player2.symbol} symbol"
-
 
 def input(board)
   validate = false
@@ -51,6 +50,11 @@ while turns < 9
 
   board.place_symbol(turn, player1)
 
+  if board.check_win(player1.array)
+    puts "#{player1.name} won!"
+    board.display_board
+    break
+  end
   board.display_board
   turns += 1
 
@@ -61,23 +65,15 @@ while turns < 9
     turn = input(board)
 
     board.place_symbol(turn, player2)
-
+    if board.check_win(player2.array)
+      puts "#{player2.name} won!"
+      board.display_board
+      break
+    end
     board.display_board
   end
   turns += 1
 
 end
-# After player1 player for three times run the game logic to check if he wins
 
-puts "\nCongratulations #{player1.name}, You won!"
-p player1.array
-p player2.array
-# If player1 is not winning move to player2 and show the available splace
-
-# Check if player2 is winning, if not move to player1 and let him enter the value in available blocks
-
-puts "\nCongratulations #{player2.name}, You won!"
-
-# after player1 has played 5 times and neither player is winning declare a Draw
-
-puts 'Its a Draw!'
+puts 'Its a Draw!' if turns == 9
