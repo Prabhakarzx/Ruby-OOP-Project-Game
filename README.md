@@ -15,7 +15,9 @@ In this project we're required to create a Tic Tac Toe Game using Ruby with OOP 
 
 ### Tic Tac Toe game rules:
 
-![board](https://mathworld.wolfram.com/images/eps-gif/Tic-Tac-Toe_600.gif)
+
+
+![board](../lib/Tic_Tac_Toe%20Example.gif)
 
 - The game start with an empty board (image on the left).
 - Player 1 start by one case using X or O and Player 2 continue by filling the next case using remaining symbol.
@@ -32,6 +34,15 @@ In this project we're required to create a Tic Tac Toe Game using Ruby with OOP 
 $ ./bin/main.rb
 ```
 
+- You have two option: 1 start new game or 2 quit the game.
+
+- The game start with an emty board and a score of player 1: 0 and player 2: 0
+-
+- The game show the board status, whose player turn is and the possible moves. The player should choose the available positions presented in a 2D array
+
+- The game continue until we get a winning combinaison or a draw.
+
+- If a player win, the score get increased and you have 2 options: Continue or Quit.
 
 
 ## Live Demo
@@ -67,12 +78,18 @@ If you don't get that result, follow this [link](https://www.ruby-lang.org/en/do
 - Twitter: [@victorgonbu](https://twitter.com/victorgonbu)
 - Linkedin: [linkedin](https://www.linkedin.com/in/victor-manuel-gonzalez-buitrago-8704731a5/)
 
+👤 **PRABHAKAR PANDEY**
+
+- Github: [@Prabhakarzx](https://github.com/Prabhakarzx)
+- Twitter: [@Prabhakarzx](https://twitter.com/prabhakarzx)
+- Linkedin: [@Prabhakarzx](https://www.linkedin.com/in/prabhakarzx/)
+
 
 ## 🤝 Contributing
 
 Contributions, issues and feature requests are welcome!
 
-Feel free to check the [issues page](issues/).
+Feel free to check the [issues page](https://github.com/Prabhakarzx/Ruby-OOP-Project-Game/issues).
 
 ## Show your support
 
@@ -80,7 +97,13 @@ Give a ⭐️ if you like this project!
 
 ## Acknowledgments
 
-- [Thanks Microverse][https://github.com/microverseinc]
+- [Microverse][https://github.com/microverseinc]
+- TheOdinProject
+- Github
+- ruby-lang.org
+- repl.it
+- depositphotos.com
+- And anyonw who supported us!
 
 ## 📝 License
 
