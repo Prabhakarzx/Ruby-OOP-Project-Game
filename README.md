@@ -12,23 +12,11 @@ In this project we're required to create a Tic Tac Toe Game using Ruby with OOP 
 > The main goal of this project is to asure the mastery on the methods ruby provides and to learn how to replicate them using basic coding knowledge.
 
 
-Milestone 1: Project Setup  (Completed)
+## Live Demo
 
-- Create lib and bin  directory
-- Make Main script executable    
-- Print "Hello world"
+You can play the game on repl.it platform, skip enviroment set up section and follow how to play section
 
-Milestone 2: User interface (Completed)
-
-- Acquire information from user
-- Create board structure
-
-
-Milestone 3: Game Logic (In progreess)
-
-- Put the game logic in work
-- Validate user moves 
-- check moves against winning and draw moves
+- [![Run on Repl.it](https://repl.it/badge/github/Prabhakarzx/Ruby-OOP-Project-Game)](https://repl.it/github/Prabhakarzx/Ruby-OOP-Project-Game)
 
 
 ## Authors
