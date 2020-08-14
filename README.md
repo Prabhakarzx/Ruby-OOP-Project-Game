@@ -1,17 +1,34 @@
-# Ruby-OOP-Project-Game Project
+# Ruby-OOP-Project-Game
+
 In this project we're required to create a Tic Tac Toe Game using Ruby with OOP concepts.
+
+> This project is split in 4 milestones, which were:
+
+- Setting up the project
+- Designing the user interface
+- Creating the game logic
+- Writing the game instructions
+
+> The main goal of this project is to asure the mastery on the methods ruby provides and to learn how to replicate them using basic coding knowledge.
+
 
 Milestone 1: Project Setup  (Completed)
 
-- lib and bin  directory created    
-- main script executable    
-- "Hello world" printed
+- Create lib and bin  directory
+- Make Main script executable    
+- Print "Hello world"
 
-Milestone 2: User interface (In progreess)
+Milestone 2: User interface (Completed)
 
-- acquired information from user
-- board structure created   
-- game basic logic commented
+- Acquire information from user
+- Create board structure
+
+
+Milestone 3: Game Logic (In progreess)
+
+- Put the game logic in work
+- Validate user moves 
+- check moves against winning and draw moves
 
 
 ## Authors
