@@ -14,6 +14,15 @@ Milestone 2: User interface (In progreess)
 - game basic logic commented
 
 
+## Authors
+
+👤 **Victor Manuel Gonzalez Buitrago**
+
+- Github: [@Shaqri](https://github.com/Shaqri)
+- Twitter: [@victorgonbu](https://twitter.com/victorgonbu)
+- Linkedin: [linkedin](https://www.linkedin.com/in/victor-manuel-gonzalez-buitrago-8704731a5/)
+
+
 ## 🤝 Contributing
 
 Contributions, issues and feature requests are welcome!
