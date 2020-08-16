@@ -13,7 +13,7 @@ Milestone 2: User interface (Completed)
 - board structure created   
 - game basic logic commented
 
-
+[![Run on Repl.it](https://repl.it/badge/github/Prabhakarzx/Ruby-OOP-Project-Game)](https://repl.it/github/Prabhakarzx/Ruby-OOP-Project-Game)
 Milestone 3: Game Logic (In progreess)
 
 - Put the game logic in work
