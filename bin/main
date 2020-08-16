@@ -18,12 +18,16 @@ def welcome
   2.Exit"
   choice = gets.chomp.to_i
   if choice == 2
-    at_exit { puts 'Goodbye, thanks for playing' }
+    at_exit { good_bye }
     exit
   elsif choice > 2 || choice < 1
     puts invalid_option_exeption
     welcome
   end
+end
+
+def good_bye
+  puts "Goodbye, thanks for playing"
 end
 
 def ask_info
@@ -93,6 +97,35 @@ def game_flow(player)
   @board.place_symbol(move, player)
 end
 
+def game_reset
+  @board.create_board
+  @player1.clear_array
+  @player2.clear_array
+  play
+end
+
+def play_again?
+  choice = play_again_statement
+
+  if choice == 1
+    true
+  elsif choice == 2
+    good_bye
+    false
+  else
+    puts invalid_option_exeption
+    play_again?
+  end
+end
+
+def play_again_statement
+  puts "Game States : #{@player1.name} : #{@player1.score} and #{@player2.name} : #{@player2.score}"
+  puts 'Whould you like to play again?
+  1. Yes
+  2. No'
+  choice = gets.chomp.to_i
+end
+
 def play
   @turns = 0
   while @turns < 9
@@ -109,31 +142,7 @@ def play
 
   end
   puts 'Its a Draw!' if @turns == 9
-  play_again
-end
-
-def game_reset
-  @board.create_board
-  @player1.clear_array
-  @player2.clear_array
-end
-
-def play_again
-  puts "Game States : #{@player1.name} : #{@player1.score} and #{@player2.name} : #{@player2.score}"
-  puts 'whould you like to play again?
-  1. Yes
-  2. No'
-  choice = gets.chomp.to_i
-
-  if choice == 1
-    game_reset
-    play
-  elsif choice == 2
-    puts 'Goodbye, thanks for playing'
-  else
-    puts invalid_option_exeption
-    play_again
-  end
+  game_reset if play_again?
 end
 
 def start_game
