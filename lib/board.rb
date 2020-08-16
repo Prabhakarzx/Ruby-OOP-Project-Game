@@ -31,7 +31,8 @@ class Board
   end
 
   def validate_symbol(symbol)
-    symbol == 'X' || symbol == 'O' ? true : false
+    symbol = [symbol]
+    symbol.include?('X') || symbol.include?('O') ? true : false
   end
 
   def check_win(array)
