@@ -27,7 +27,7 @@ def welcome
 end
 
 def good_bye
-  puts "Goodbye, thanks for playing"
+  puts 'Goodbye, thanks for playing'
 end
 
 def ask_info
@@ -89,7 +89,8 @@ def winner?(player)
 end
 
 def game_flow(player)
-  puts "Its #{player.name} turn now!"
+  puts "
+  Its #{player.name} turn now!"
   puts "#{player.name}, You can put #{player.symbol} in available spaces."
 
   display_board
@@ -123,7 +124,7 @@ def play_again_statement
   puts 'Whould you like to play again?
   1. Yes
   2. No'
-  choice = gets.chomp.to_i
+  gets.chomp.to_i
 end
 
 def play
@@ -141,8 +142,12 @@ def play
     break if winner?(@player2)
 
   end
-  puts 'Its a Draw!' if @turns == 9
+  draw
   game_reset if play_again?
+end
+
+def draw
+  puts "It's a draw" if @turns == 9
 end
 
 def start_game
