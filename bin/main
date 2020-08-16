@@ -27,14 +27,14 @@ def welcome
 end
 
 def good_bye
-  puts 'Goodbye, thanks for playing'
+  puts 'Have a great time!, thanks for playing'
 end
 
 def ask_info
-  puts 'What is you name Player 1?'
+  puts "\nWhat is you name Player 1?"
   name = gets.chomp.capitalize
 
-  puts "#{name} type a symbol to play with (X, O)"
+  puts "\n#{name} type a symbol to play with (X, O)"
   while @validate == false
     symbol = gets.chomp.upcase
     if @board.validate_symbol(symbol)
@@ -46,13 +46,13 @@ def ask_info
 
   @player1 = Player.new(name, symbol)
 
-  puts 'What is your name Player 2?'
+  puts "\nWhat is your name Player 2?"
   name = gets.chomp.capitalize
   symbol = symbol == 'X' ? 'O' : 'X'
 
   @player2 = Player.new(name, symbol)
 
-  puts "#{@player2.name} You have been assigned with #{@player2.symbol} symbol"
+  puts "\n#{@player2.name} You have been assigned with #{@player2.symbol} symbol"
 end
 
 def validate_input
@@ -61,7 +61,7 @@ def validate_input
   while @validate == false
     turn = gets.chomp.to_i
     @validate = @board.validate_turn(turn)
-    puts 'please enter a valid position' if @validate == false
+    puts 'Please enter a valid position' if @validate == false
   end
   turn
 end
@@ -71,7 +71,7 @@ def invalid_option_exeption
 end
 
 def win_statement(player)
-  "#{player.name} Won!"
+  "\n#{player.name} Won!\n\n"
 end
 
 def winner?(player)
@@ -89,8 +89,7 @@ def winner?(player)
 end
 
 def game_flow(player)
-  puts "
-  Its #{player.name} turn now!"
+  puts "\nIts #{player.name}\'s turn now!\n\n"
   puts "#{player.name}, You can put #{player.symbol} in available spaces."
 
   display_board
@@ -120,10 +119,10 @@ def play_again?
 end
 
 def play_again_statement
-  puts "Game States : #{@player1.name} : #{@player1.score} and #{@player2.name} : #{@player2.score}"
-  puts 'Whould you like to play again?
+  puts "\nGame States : #{@player1.name} : #{@player1.score} and #{@player2.name} : #{@player2.score}"
+  puts "\nWould you like to play again?
   1. Yes
-  2. No'
+  2. No\n"
   gets.chomp.to_i
 end
 
@@ -147,7 +146,7 @@ def play
 end
 
 def draw
-  puts "It's a draw" if @turns == 9
+  puts "It's a draw\n" if @turns == 9
 end
 
 def start_game
