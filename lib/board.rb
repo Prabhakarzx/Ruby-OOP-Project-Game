@@ -1,14 +1,9 @@
 class Board
   WINNING_MOVES = [[1, 2, 3], [4, 5, 6], [7, 8, 9], [1, 4, 7], [2, 5, 8], [3, 6, 9], [1, 5, 9], [3, 5, 7]].freeze
+  attr_reader :board
 
   def create_board
     @board = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-  end
-
-  def display_board
-    p @board[0..2]
-    p @board[3..5]
-    p @board[6..9]
   end
 
   def place_symbol(position, player)

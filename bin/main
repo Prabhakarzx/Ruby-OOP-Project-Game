@@ -1,118 +1,145 @@
 #!/usr/bin/env ruby
 require_relative '../lib/board.rb'
 require_relative '../lib/player.rb'
-board = Board.new
-board.create_board
-puts "Welcome to tic tac toe
-1.play
-2.exit"
-choice = gets.chomp.to_i
-if choice == 2
-  at_exit { puts 'Goodbye, thanks for playing' }
-  exit
-end
-validate = false
-puts 'What is you name Player 1?'
-name = gets.chomp
 
-puts "#{name} type a symbol to play with (X, O)"
-while validate == false
-  symbol = gets.chomp.upcase
-  if board.validate_symbol(symbol)
-    validate = true
-  else
-    puts 'please enter a valid symbol'
+@board = Board.new
+@board.create_board
+@validate = false
+
+def display_board
+  p @board.board[0..2]
+  p @board.board[3..5]
+  p @board.board[6..8]
+end
+
+def welcome
+  puts "Welcome to tic tac toe
+  1.Play
+  2.Exit"
+  choice = gets.chomp.to_i
+  if choice == 2
+    at_exit { puts 'Goodbye, thanks for playing' }
+    exit
+  elsif choice > 2 || choice < 1
+    puts invalid_option_exeption
+    welcome
   end
 end
 
-player1 = Player.new(name, symbol)
+def ask_info
+  puts 'What is you name Player 1?'
+  name = gets.chomp.capitalize
 
-puts 'What is your name Player 2?'
-name = gets.chomp
-symbol = symbol == 'X' ? 'O' : 'X'
+  puts "#{name} type a symbol to play with (X, O)"
+  while @validate == false
+    symbol = gets.chomp.upcase
+    if @board.validate_symbol(symbol)
+      @validate = true
+    else
+      puts 'Please enter a valid symbol'
+    end
+  end
 
-player2 = Player.new(name, symbol)
+  @player1 = Player.new(name, symbol)
 
-puts "#{player2.name} You have been assigned with #{player2.symbol} symbol"
+  puts 'What is your name Player 2?'
+  name = gets.chomp.capitalize
+  symbol = symbol == 'X' ? 'O' : 'X'
 
-def input(board)
-  validate = false
+  @player2 = Player.new(name, symbol)
 
-  while validate == false
+  puts "#{@player2.name} You have been assigned with #{@player2.symbol} symbol"
+end
+
+def validate_input
+  @validate = false
+
+  while @validate == false
     turn = gets.chomp.to_i
-    validate = board.validate_turn(turn)
-    puts 'please enter a valid position' if validate == false
+    @validate = @board.validate_turn(turn)
+    puts 'please enter a valid position' if @validate == false
   end
   turn
 end
 
-# rubocop:disable Metrics/MethodLength
-
-def game(player1, player2, board)
-  turns = 0
-  while turns < 9
-    puts "\n Its #{player1.name} turn now!"
-    puts "#{player1.name}, You can put #{player1.symbol} in available spaces."
-
-    board.display_board
-
-    turn = input(board)
-
-    board.place_symbol(turn, player1)
-
-    if board.check_win(player1.array)
-      puts "#{player1.name} won!"
-      player1.score += 1
-
-      board.display_board
-      break
-    end
-    board.display_board
-    turns += 1
-
-    unless turns == 9
-      puts "\n Its #{player2.name} turn now!"
-      puts "#{player2.name}, You can put #{player2.symbol} in available spaces."
-
-      turn = input(board)
-
-      board.place_symbol(turn, player2)
-      if board.check_win(player2.array)
-        puts "#{player2.name} won!"
-        player2.score += 1
-        board.display_board
-        break
-      end
-      board.display_board
-    end
-    turns += 1
-
-  end
-  puts 'Its a Draw!' if turns == 10
-
-  play_again(player1, player2, board)
+def invalid_option_exeption
+  'Please enter a valid option'
 end
 
-# rubocop:enable Metrics/MethodLength
+def win_statement(player)
+  "#{player.name} Won!"
+end
 
-def play_again(player1, player2, board)
-  puts "Game States : #{player1.name} : #{player1.score} and #{player2.name} : #{player2.score}"
+def winner?(player)
+  if @board.check_win(player.array)
+    puts win_statement(player)
+    player.score_up
+
+    display_board
+    true
+  else
+    display_board
+    @turns += 1
+    false
+  end
+end
+
+def game_flow(player)
+  puts "Its #{player.name} turn now!"
+  puts "#{player.name}, You can put #{player.symbol} in available spaces."
+
+  display_board
+  move = validate_input
+  @board.place_symbol(move, player)
+end
+
+def play
+  @turns = 0
+  while @turns < 9
+
+    game_flow(@player1)
+
+    break if winner?(@player1)
+
+    next if @turns == 9
+
+    game_flow(@player2)
+
+    break if winner?(@player2)
+
+  end
+  puts 'Its a Draw!' if @turns == 9
+  play_again
+end
+
+def game_reset
+  @board.create_board
+  @player1.clear_array
+  @player2.clear_array
+end
+
+def play_again
+  puts "Game States : #{@player1.name} : #{@player1.score} and #{@player2.name} : #{@player2.score}"
   puts 'whould you like to play again?
-1. Yes
-2. No'
+  1. Yes
+  2. No'
   choice = gets.chomp.to_i
 
   if choice == 1
-    board.create_board
-    player1.clear_array
-    player2.clear_array
-    game(player1, player2, board)
+    game_reset
+    play
   elsif choice == 2
     puts 'Goodbye, thanks for playing'
   else
-    puts 'Please enter a valid option'
-    play_again(player1, player2, board)
+    puts invalid_option_exeption
+    play_again
   end
 end
 
-game(player1, player2, board)
+def start_game
+  welcome
+  ask_info
+  play
+end
+
+start_game
