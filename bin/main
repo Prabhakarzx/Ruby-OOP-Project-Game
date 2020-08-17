@@ -55,15 +55,14 @@ def ask_info
   puts "\n#{@player2.name} You have been assigned with #{@player2.symbol} symbol"
 end
 
-def validate_input
-  @validate = false
-
-  while @validate == false
-    turn = gets.chomp.to_i
-    @validate = @board.validate_turn(turn)
-    puts 'Please enter a valid position' if @validate == false
+def input_validation
+  turn = gets.chomp.to_i
+  if @board.validate_turn(turn)
+    turn
+  else
+    puts 'Please enter a valid position'
+    input_validation
   end
-  turn
 end
 
 def invalid_option_exeption
@@ -74,26 +73,12 @@ def win_statement(player)
   "\n#{player.name} Won!\n\n"
 end
 
-def winner?(player)
-  if @board.check_win(player.array)
-    puts win_statement(player)
-    player.score_up
-
-    display_board
-    true
-  else
-    display_board
-    @turns += 1
-    false
-  end
-end
-
 def game_flow(player)
   puts "\nIts #{player.name}\'s turn now!\n\n"
   puts "#{player.name}, You can put #{player.symbol} in available spaces."
 
   display_board
-  move = validate_input
+  move = input_validation
   @board.place_symbol(move, player)
 end
 
@@ -126,20 +111,38 @@ def play_again_statement
   gets.chomp.to_i
 end
 
+def won(player)
+  puts win_statement(player)
+  player.score_up
+  display_board
+end
+
+def turn_up
+  @turns += 1
+  display_board
+end
+
 def play
   @turns = 0
   while @turns < 9
 
     game_flow(@player1)
 
-    break if winner?(@player1)
+    if @board.winner?(@player1)
+      won(@player1)
+      break
+    end
+    turn_up
 
     next if @turns == 9
 
     game_flow(@player2)
 
-    break if winner?(@player2)
-
+    if @board.winner?(@player2)
+      won(@player2)
+      break
+    end
+    turn_up
   end
   draw
   game_reset if play_again?

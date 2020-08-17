@@ -41,4 +41,8 @@ class Board
     end
     false
   end
+
+  def winner?(player)
+    check_win(player.array) ? true : false
+  end
 end
