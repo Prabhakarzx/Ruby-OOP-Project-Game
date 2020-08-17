@@ -1,98 +1,161 @@
 #!/usr/bin/env ruby
-puts 'Hello World!'
-players = {}
-a = %w[1 2 3]
-b = %w[4 5 6]
-c = %w[7 8 9]
-@board = [a, b, c]
+require_relative '../lib/board.rb'
+require_relative '../lib/player.rb'
 
-# Here we Get player 1 name
-puts 'Player 1 please let me know your name'
-player1 = gets.chomp
-# Here we get player 2 name
-puts 'Player 2 please let me know your name'
-player2 = gets.chomp
-# Ask user 1 for prefered symbol
-puts "#{player1} type a symbol to play with (X, 0)"
-players[player1] = gets.chomp.downcase
+@board = Board.new
+@board.create_board
+@validate = false
 
-players[player2] = players[player1] == 'x' ? '0' : 'x'
-
-puts "#{player2} You have been assigned with #{players[player2]} symbol"
-p "Your wepon #{players}"
-
-puts "Here is the play board \n Rows are 1, 2 , 3 And Colums are a, b, c (mock)"
-puts '  _a___b__c_'
-puts '1 |  |  |  |'
-puts '  |__|__|__|'
-puts '2 |  |  |  |'
-puts '  |__|__|__|'
-puts '3 |  |  |  |'
-puts '  |__|__|__|'
-
-# Display the available space and let the player1 put x or 0
-
-def display__board
-  p @board[0]
-  p @board[1]
-  p @board[2]
+def display_board
+  p @board.board[0..2]
+  p @board.board[3..5]
+  p @board.board[6..8]
 end
 
-# This method search for position in board and change it for player symbol (TSE requirement)
-def position(number, symbol)
-  if number < 4
-    line = @board[0]
-  elsif number > 3 && number < 7
-    line = @board[1]
-  elsif number > 6
-    line = @board[2]
+def welcome
+  puts "Welcome to tic tac toe
+  1.Play
+  2.Exit"
+  choice = gets.chomp.to_i
+  if choice == 2
+    at_exit { good_bye }
+    exit
+  elsif choice > 2 || choice < 1
+    puts invalid_option_exeption
+    welcome
+  end
+end
+
+def good_bye
+  puts 'Have a great time!, thanks for playing'
+end
+
+def ask_info
+  puts "\nWhat is you name Player 1?"
+  name = gets.chomp.capitalize
+
+  puts "\n#{name} type a symbol to play with (X, O)"
+  while @validate == false
+    symbol = gets.chomp.upcase
+    if @board.validate_symbol(symbol)
+      @validate = true
+    else
+      puts 'Please enter a valid symbol'
+    end
+  end
+
+  @player1 = Player.new(name, symbol)
+
+  puts "\nWhat is your name Player 2?"
+  name = gets.chomp.capitalize
+  symbol = symbol == 'X' ? 'O' : 'X'
+
+  @player2 = Player.new(name, symbol)
+
+  puts "\n#{@player2.name} You have been assigned with #{@player2.symbol} symbol"
+end
+
+def input_validation
+  turn = gets.chomp.to_i
+  if @board.validate_turn(turn)
+    turn
   else
-    puts 'does not exist you lost your turn'
-
-  end
-  number = number.to_s
-  line&.each_with_index do |element, index|
-    line[index] = symbol if element == number
+    puts 'Please enter a valid position'
+    input_validation
   end
 end
 
-turns = 0
-while turns < 9
-  # Now find out the available space and prompt player1 to put his symbol
-  puts "\n Its #{player1} turn now!"
-  puts "#{player1}, You can put #{players[player1]} in available spaces."
-
-  display__board
-
-  turn1 = gets.chomp.to_i
-  position(turn1, players[player1])
-
-  display__board
-  # Prompt player2 with available space to put his symbol
-  turns += 1
-
-  unless turns == 9
-    puts "\n Its #{player2} turn now!"
-    puts "#{player2}, You can put #{players[player2]} in available spaces."
-
-    turn2 = gets.chomp.to_i
-    position(turn2, players[player2])
-
-    display__board
-  end
-  turns += 1
-
+def invalid_option_exeption
+  'Please enter a valid option'
 end
-# After player1 player for three times run the game logic to check if he wins
 
-puts "\nCongratulations #{player1}, You won!"
+def win_statement(player)
+  "\n#{player.name} Won!\n\n"
+end
 
-# If player1 is not winning move to player2 and show the available splace
+def game_flow(player)
+  puts "\nIts #{player.name}\'s turn now!\n\n"
+  puts "#{player.name}, You can put #{player.symbol} in available spaces."
 
-# Check if player2 is winning, if not move to player1 and let him enter the value in available blocks
+  display_board
+  move = input_validation
+  @board.place_symbol(move, player)
+end
 
-puts "\nCongratulations #{player2}, You won!"
+def game_reset
+  @board.create_board
+  @player1.clear_array
+  @player2.clear_array
+  play
+end
 
-# after player1 has played 5 times and neither player is winning declare a Draw
+def play_again?
+  choice = play_again_statement
 
-puts 'Its a Draw!'
+  if choice == 1
+    true
+  elsif choice == 2
+    good_bye
+    false
+  else
+    puts invalid_option_exeption
+    play_again?
+  end
+end
+
+def play_again_statement
+  puts "\nGame States : #{@player1.name} : #{@player1.score} and #{@player2.name} : #{@player2.score}"
+  puts "\nWould you like to play again?
+  1. Yes
+  2. No\n"
+  gets.chomp.to_i
+end
+
+def won(player)
+  puts win_statement(player)
+  player.score_up
+  display_board
+end
+
+def turn_up
+  @turns += 1
+  display_board
+end
+
+def play
+  @turns = 0
+  while @turns < 9
+
+    game_flow(@player1)
+
+    if @board.winner?(@player1)
+      won(@player1)
+      break
+    end
+    turn_up
+
+    next if @turns == 9
+
+    game_flow(@player2)
+
+    if @board.winner?(@player2)
+      won(@player2)
+      break
+    end
+    turn_up
+  end
+  draw
+  game_reset if play_again?
+end
+
+def draw
+  puts "It's a draw\n" if @turns == 9
+end
+
+def start_game
+  welcome
+  ask_info
+  play
+end
+
+start_game
